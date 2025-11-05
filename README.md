@@ -34,3 +34,37 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Authentication setup (NextAuth + Prisma)
+
+This project includes server-side scaffolding for authentication using NextAuth and Prisma (SQLite). To finish setup locally:
+
+1. Install required packages:
+
+```bash
+npm install next-auth @next-auth/prisma-adapter @prisma/client prisma bcryptjs
+```
+
+2. Copy `.env.example` to `.env.local` and set `NEXTAUTH_SECRET` to a strong random value.
+
+3. Initialize Prisma and run the migration to create the SQLite DB:
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+4. Start the dev server:
+
+```bash
+npm run dev
+```
+
+API endpoints:
+- `POST /api/auth/signup` — create new user (body: { email, password, name })
+- NextAuth: `/api/auth/[...nextauth]` — sign in using the Credentials provider (email + password)
+
+Notes:
+- Passwords are hashed with bcrypt before storage.
+- Sessions are stored in the database (Prisma Session model). Protect other API routes by checking the session.
+
