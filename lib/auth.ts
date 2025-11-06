@@ -2,8 +2,9 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "./prisma"
 import { verifyPassword } from "./hash"
+import type { NextAuthOptions } from "next-auth"
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -35,4 +36,4 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
-export type AuthOptions = typeof authOptions
+export type AuthOptions = NextAuthOptions
