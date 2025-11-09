@@ -25,7 +25,6 @@ export const authOptions: NextAuthOptions = {
         const isValid = await verifyPassword(credentials.password, user.hashedPassword)
         if (!isValid) return null
 
-        // NextAuth expects an object with at least an id
         return { id: user.id, email: user.email, name: user.name }
       },
     }),
