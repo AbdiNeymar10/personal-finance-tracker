@@ -15,7 +15,6 @@ export async function POST(req: Request) {
     if (existing) {
       return NextResponse.json({ error: 'User already exists' }, { status: 409 })
     }
-    // hashed password
     const hashedPassword = await hashPassword(password)
 
     const user = await prisma.user.create({
@@ -29,7 +28,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ user }, { status: 201 })
   } catch (err) {
-    // generic error
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
