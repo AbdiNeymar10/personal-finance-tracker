@@ -10,7 +10,7 @@ export default function Home() {
       </p>
 
       <AuthButtons />
-
+     // create new account
       <div className="mt-8 text-sm text-gray-600">
         <p>
           New here? Create an account via the Sign up button. Your data is private
