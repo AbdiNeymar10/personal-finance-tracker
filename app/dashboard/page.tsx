@@ -1,10 +1,10 @@
 "use client";
 
-import Sidebar from "../components/Sidebar";
-import SummaryCards from "../components/SummaryCards";
-import IncomeExpensesChart from "../components/IncomeExpensesChart";
-import ExpensesBreakdownChart from "../components/ExpensesBreakdownChart";
-import TransactionsTable from "../components/TransactionsTable";
+import Sidebar from "@/components/Sidebar";
+import SummaryCards from "@/components/SummaryCards";
+import IncomeExpensesChart from "@/components/IncomeExpensesChart";
+import ExpensesBreakdownChart from "@/components/ExpensesBreakdownChart";
+import TransactionsTable from "@/components/TransactionsTable";
 
 export default function DashboardPage() {
   return (
