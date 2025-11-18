@@ -55,4 +55,55 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// Future models (transactions, categories) will be added later
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  userId    String
+  budgets   Budget[]
+  transactions Transaction[]
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, name])
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  categoryId  String
+  amount      Float
+  type        TransactionType
+  date        DateTime
+  note        String?
+  createdAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model Budget {
+  id          String   @id @default(cuid())
+  userId      String
+  categoryId  String
+  amount      Float
+  period      BudgetPeriod
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([userId, categoryId, period, startDate, endDate])
+}
+
+enum BudgetPeriod {
+  MONTHLY
+  YEARLY
+}
