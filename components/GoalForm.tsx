@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 
+type Goal = {
+  name: string;
+  targetAmount: string;
+  targetDate: string;
+  category: string;
+  color: string;
+  currentAmount: string;
+};
+
 const categories = [
   { label: "Emergency Fund", value: "emergency", color: "#f87171" },
   { label: "Vacation", value: "vacation", color: "#60a5fa" },
@@ -10,9 +19,9 @@ const categories = [
 export default function GoalForm({
   onSubmit,
 }: {
-  onSubmit: (goal: any) => void;
+  onSubmit: (goal: Goal) => void;
 }) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<Goal>({
     name: "",
     targetAmount: "",
     targetDate: "",
